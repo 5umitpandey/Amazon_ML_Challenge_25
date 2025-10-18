@@ -104,3 +104,84 @@ Participants are **STRICTLY NOT ALLOWED** to obtain prices from the internet, ex
 - Explore feature engineering techniques for text and image data
 - Consider ensemble methods combining different model types
 - Pay attention to outliers and data preprocessing
+
+------
+------
+
+**Team Name:** A2Z  
+**Team Members:** Aryan Kamboj, Sanmeet Singh, Sumit Pandey, Yash Arora  
+**Submission Date:** 13/10/2025
+
+---
+
+## 1. Executive Summary
+*We developed a sophisticated multi-modal ensemble approach that combines text-based gradient boosting models with deep learning-based image analysis using CLIP embeddings. Our solution leverages stacked generalization with LightGBM, XGBoost, CatBoost, and a custom neural network, optimized through SMAPE-driven weight tuning for robust price prediction across diverse product categories.*
+
+
+
+---
+
+## 2. Methodology Overview
+
+### 2.1 Problem Analysis
+*The Amazon pricing challenge requires predicting product prices using both textual information and product images, with the key challenge being the multi-modal nature of the data and the need for robust predictions across diverse product categories.*
+
+**Key Observations:**
+- Text features provide strong baseline performance for price prediction
+- Image embeddings capture visual quality and product characteristics not evident in text
+- Ensemble methods significantly outperform individual models
+- Log transformation of prices improves model stability and performance
+
+### 2.2 Solution Strategy
+**Approach Type:** Multi-Modal Hybrid Ensemble  
+**Core Innovation:** SMAPE-optimized fusion of text-based gradient boosting models and image-based deep learning with resumable, GPU-accelerated training pipelines.
+
+
+---
+
+## 3. Model Architecture
+
+### 3.1 Architecture Overview
+Raw Data → Text Features → [LightGBM + XGBoost + CatBoost] → Ridge Meta-Model → Final Prediction
+↓
+Raw Images → CLIP Embeddings → PriceRegressor NN → Weighted Fusion
+
+### 3.2 Model Components
+
+**Text Processing Pipeline:**
+- Preprocessing steps: Sparse matrix transformation, log1p target transformation
+- Model type: Ensemble (LightGBM, XGBoost, CatBoost) with Ridge meta-learner
+- Key parameters: GPU acceleration, early stopping, feature/bagging fractions
+
+**Image Processing Pipeline:**
+- Preprocessing steps: 224×224 resize, JPEG compression, CLIP embedding extraction
+- Model type: Custom PriceRegressor neural network
+- Key parameters: 512-256-128 architecture, LayerNorm, Dropout(0.25), SmoothL1 loss
+
+**Ensemble Framework:**
+- Stacking Method: Ridge regression on out-of-fold predictions
+- Weight Optimization: SMAPE-driven text-image fusion weights
+- Validation: 5-fold cross-validation with 10% holdout
+
+
+
+---
+
+
+## 4. Model Performance
+
+### 4.1 Validation Results
+- **SMAPE Score:** [51.99]
+
+
+
+## 5. Conclusion
+*Our solution demonstrates the power of combining traditional gradient boosting methods with modern deep learning approaches for multi-modal price prediction. The ensemble framework provides robust performance while the optimized fusion strategy ensures balanced contribution from both textual and visual information. The resumable, GPU-accelerated implementation makes the solution practical for large-scale deployment.*
+
+---
+
+## Appendix
+
+### A. Code artefacts
+*[Drive link for complete code directory](https://drive.google.com/drive/folders/1_z-q4jEKoYk-1G-dTbymTC_7N29bUsJA?usp=sharing)*
+
